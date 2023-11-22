@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
-import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,7 @@ export class TaskService {
   ];
 
   getTasks() {
-    return of(this.tasks);
+    return this.tasks;
   }
 
   addTask(text: string) {

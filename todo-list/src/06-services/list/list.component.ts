@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -12,9 +11,11 @@ import { Observable } from 'rxjs';
   styleUrl: './list.component.scss',
 })
 export class ListComponent {
-  tasks$: Observable<Task[]> = this.taskService.getTasks();
+  tasks: Task[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) {
+    this.tasks = this.taskService.getTasks();
+  }
 
   handleSpanClick(index: number) {
     this.taskService.toggleCompleted(index);
