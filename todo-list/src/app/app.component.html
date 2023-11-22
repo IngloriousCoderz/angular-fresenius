@@ -1,7 +1,3 @@
 <h1>{{ name }}'s Todo List</h1>
-<app-form (formSubmit)="handleSubmit($event)" />
-<app-list
-  [tasks]="tasks"
-  (spanClick)="handleSpanClick($event)"
-  (buttonClick)="handleButtonClick($event)"
-/>
+<app-form />
+<app-list />

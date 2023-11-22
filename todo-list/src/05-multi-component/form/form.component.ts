@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-form',
@@ -12,16 +11,18 @@ import { TaskService } from '../task.service';
   styleUrl: './form.component.scss',
 })
 export class FormComponent {
+  @Output() formSubmit = new EventEmitter<string>();
+
   form;
 
-  constructor(private fb: FormBuilder, private taskService: TaskService) {
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       text: ['', Validators.required],
     });
   }
 
   handleSubmit() {
-    this.taskService.addTask(this.form.value.text || '');
+    this.formSubmit.emit(this.form.value.text || '');
     this.form.patchValue({ text: '' });
   }
 }
