@@ -1,21 +1,27 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { ListComponent } from './list/list.component';
-import { Task } from './task';
-import { FormComponent } from './form/form.component';
+import { FormsModule } from '@angular/forms';
+
+interface Task {
+  id: number;
+  text?: string | null;
+  completed?: boolean | null;
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormComponent, ListComponent],
+  imports: [CommonModule, FormsModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   name = 'Matteo Antony';
 
-  tasks: Task[] = [
+  text = '';
+
+  tasks = [
     { id: 1, text: 'Learn Angular', completed: true },
     { id: 2, text: 'Look for a job', completed: false },
     { id: 3, text: 'Forget everything' },
@@ -25,9 +31,10 @@ export class AppComponent {
     return item.id;
   }
 
-  handleSubmit(text: string) {
+  handleSubmit() {
     const maxId = this.tasks.length ? this.tasks[this.tasks.length - 1].id : 0;
-    this.tasks.push({ id: maxId + 1, text });
+    this.tasks.push({ id: maxId + 1, text: this.text });
+    this.text = '';
   }
 
   handleSpanClick(index: number) {

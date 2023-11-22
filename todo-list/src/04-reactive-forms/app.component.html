@@ -1,0 +1,24 @@
+<h1>{{ name }}'s Todo List</h1>
+<form [formGroup]="form" (submit)="handleSubmit()">
+  <input placeholder="What next?" autofocus formControlName="text" />
+  <button [disabled]="form.status === 'INVALID' ? true : null">Add</button>
+</form>
+<div
+  class="error"
+  *ngIf="!form.pristine && form.controls.text.errors?.['required']"
+>
+  Text is required
+</div>
+<ul>
+  @for (task of tasks; track task.id; let i = $index) {
+  <li>
+    <span
+      [class]="{ completed: task.completed }"
+      (click)="handleSpanClick(i)"
+      >{{ task.text }}</span
+    >
+    &nbsp;
+    <button (click)="handleButtonClick(i)">x</button>
+  </li>
+  }
+</ul>
