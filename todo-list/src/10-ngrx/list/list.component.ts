@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '../task';
 import { Observable } from 'rxjs';
@@ -14,14 +14,10 @@ import { TodoListState } from '../todo-list-state';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   tasks$: Observable<Task[]> = this.store.select<Task[]>(selectTasks);
 
   constructor(private store: Store<TodoListState>) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(TaskActions.fetchTasks({}));
-  }
 
   handleSpanClick(task: Task) {
     this.store.dispatch(TaskActions.toggleCompleted({ id: task.id }));
