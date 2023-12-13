@@ -1,0 +1,7 @@
+<li *ngFor="let task of tasks">
+  <span [class]="{ completed: task.completed }" (click)="handleSpanClick(task)"
+    >{{ task.text }}</span
+  >
+  &nbsp;
+  <button (click)="handleButtonClick(task)">x</button>
+</li>

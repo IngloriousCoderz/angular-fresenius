@@ -21,11 +21,11 @@ export class ListComponent implements OnInit {
     });
   }
 
-  handleSpanClick(index: number) {
-    this.taskService.toggleCompleted(index);
+  handleSpanClick(task: Task) {
+    this.taskService.toggleCompleted(task);
   }
 
-  handleButtonClick(index: number) {
-    this.taskService.removeTask(index);
+  handleButtonClick(task: Task) {
+    this.taskService.removeTask(task);
   }
 }
