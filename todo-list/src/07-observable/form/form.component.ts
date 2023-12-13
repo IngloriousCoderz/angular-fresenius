@@ -21,7 +21,7 @@ export class FormComponent {
   }
 
   handleSubmit() {
-    this.taskService.addTask(this.form.value.text || '').subscribe();
+    this.taskService.addTask(this.form.value.text || '');
     this.form.patchValue({ text: '' });
   }
 }
