@@ -1,15 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import { TaskActions } from './app.actions';
 
+import { TodoListState } from './todo-list-state';
 import { Task } from './task';
 
-const INITIAL_STATE = [
+const INITIAL_STATE: Task[] = [
   { id: 1, text: 'Learn Angular', completed: true },
   { id: 2, text: 'Look for a job', completed: false },
   { id: 3, text: 'Forget everything' },
 ];
 
-export const todoList = createReducer(
+export const tasks = createReducer(
   INITIAL_STATE,
 
   on(TaskActions.addTask, (state, { text }) => {
@@ -29,6 +30,6 @@ export const todoList = createReducer(
 );
 
 // selectors
-export const selectTasks = (state: Task[]) => state;
-export const selectTask = (state: Task[], id: number) =>
-  state.find((task) => task.id === id);
+export const selectTasks = (state: TodoListState) => state.tasks;
+export const selectTask = (state: TodoListState, id: number) =>
+  state.tasks.find((task) => task.id === id);

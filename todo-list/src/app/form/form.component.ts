@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TaskService } from '../task.service';
+import { Store } from '@ngrx/store';
+import { TodoListState } from '../todo-list-state';
+import { TaskActions } from '../app.actions';
 
 @Component({
   selector: 'app-form',
@@ -14,14 +16,16 @@ import { TaskService } from '../task.service';
 export class FormComponent {
   form;
 
-  constructor(private fb: FormBuilder, private taskService: TaskService) {
+  constructor(private fb: FormBuilder, private store: Store<TodoListState>) {
     this.form = this.fb.group({
       text: ['', Validators.required],
     });
   }
 
   handleSubmit() {
-    this.taskService.addTask(this.form.value.text || '').subscribe();
+    this.store.dispatch(
+      TaskActions.addTask({ text: this.form.value.text || '' })
+    );
     this.form.patchValue({ text: '' });
   }
 }

@@ -5,6 +5,12 @@ interface Action {
   payload: string | number;
 }
 
+const INITIAL_STATE = [
+  { id: 1, text: 'Learn Angular', completed: true },
+  { id: 2, text: 'Look for a job', completed: false },
+  { id: 3, text: 'Forget everything' },
+];
+
 // action types
 const ADD_TASK = 'add-task';
 const TOGGLE_COMPLETED = 'toggle-completed';
@@ -22,7 +28,7 @@ export const removeTask = (id: number) => ({
 });
 
 //reducer
-export function todoList(state: Task[], action: Action) {
+export function todoList(state: Task[] = INITIAL_STATE, action: Action) {
   switch (action.type) {
     case ADD_TASK:
       const maxId = state.length ? state[state.length - 1].id : 0;

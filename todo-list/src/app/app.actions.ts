@@ -9,7 +9,7 @@ import { createAction, createActionGroup, props } from '@ngrx/store';
 // export const removeTask = createAction('remove-task', props<{ id: number }>());
 
 export const TaskActions = createActionGroup({
-  source: 'Task',
+  source: 'Tasks',
   events: {
     'Add Task': props<{ text: string }>(),
     'Toggle Completed': props<{ id: number }>(),
